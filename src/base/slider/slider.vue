@@ -50,6 +50,7 @@
           return
         }
         this._setSliderWidth(true)
+        this.slider.refresh()
       })
     },
     methods: {
@@ -81,8 +82,7 @@
             loop: this.loop,
             threshold: 0.3,
             speed: 400
-          },
-          click: true
+          }
         })
         this.slider.on('scrollEnd', () => {
           let pageIndex = this.slider.getCurrentPage().pageX
@@ -105,6 +105,9 @@
           this.slider.goToPage(pageIndex, 0, 400)
         }, this.interval)
       }
+    },
+    destroyed() {
+      clearTimeout(this.timer)
     }
   }
 </script>
